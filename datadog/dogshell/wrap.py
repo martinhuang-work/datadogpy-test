@@ -35,6 +35,7 @@ import warnings
 # datadog
 from datadog import initialize, api, __version__
 from datadog.util.compat import is_p3k
+from security import safe_command
 
 
 SUCCESS = "success"
@@ -111,7 +112,7 @@ def execute(cmd, cmd_timeout, sigterm_timeout, sigkill_timeout, proc_poll_interv
     stdout = b""
     stderr = b""
     try:
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        proc = safe_command.run(subprocess.Popen, cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     except Exception:
         print(u"Failed to execute %s" % (repr(cmd)), file=sys.stderr)
         raise

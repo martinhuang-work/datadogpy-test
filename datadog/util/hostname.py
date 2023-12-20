@@ -13,6 +13,7 @@ from typing import Dict, Optional
 # datadog
 from datadog.util.compat import url_lib, is_p3k, iteritems
 from datadog.util.config import get_config, get_os, CfgNotFound
+from security import safe_command
 
 VALID_HOSTNAME_RFC_1123_PATTERN = re.compile(
     r"^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$"
@@ -85,7 +86,7 @@ def get_hostname(hostname_from_config):
         def _get_hostname_unix():
             try:
                 # try fqdn
-                p = subprocess.Popen(["/bin/hostname", "-f"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+                p = safe_command.run(subprocess.Popen, ["/bin/hostname", "-f"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
                 out, err = p.communicate()
                 if p.returncode == 0:
                     if is_p3k():
