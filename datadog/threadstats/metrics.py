@@ -5,12 +5,12 @@
 Metric roll-up classes.
 """
 from collections import defaultdict
-import random
 import itertools
 import threading
 
 from datadog.util.compat import iternext
 from datadog.threadstats.constants import MetricType
+import secrets
 
 
 class Metric(object):
@@ -126,7 +126,7 @@ class Histogram(Metric):
         if self.count < self.sample_size:
             self.samples.append(value)
         else:
-            self.samples[random.randrange(0, self.sample_size)] = value
+            self.samples[secrets.SystemRandom().randrange(0, self.sample_size)] = value
         self.count = iternext(self.iter_counter)
 
     def flush(self, timestamp, interval):

@@ -7,8 +7,6 @@
 """
 DogStatsd is a Python client for DogStatsd, a Statsd fork for Datadog.
 """
-# Standard libraries
-from random import random
 import logging
 import os
 import socket
@@ -16,6 +14,7 @@ import errno
 import threading
 import time
 from threading import Lock, RLock
+import secrets
 
 try:
     import queue
@@ -917,7 +916,7 @@ class DogStatsd(object):
         if sample_rate is None:
             sample_rate = self.default_sample_rate
 
-        if sample_rate != 1 and random() > sample_rate:
+        if sample_rate != 1 and secrets.SystemRandom().random() > sample_rate:
             return
 
         # Resolve the full tag list
