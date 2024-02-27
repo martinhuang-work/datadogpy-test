@@ -2,7 +2,6 @@
 # This product includes software developed at Datadog (https://www.datadoghq.com/).
 # Copyright 2015-Present Datadog, Inc
 # stdlib
-from __future__ import print_function
 import os
 import sys
 
