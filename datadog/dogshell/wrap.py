@@ -20,8 +20,6 @@ And you can give the command a timeout too:
 dogwrap -n test-job -k $API_KEY --timeout=1 "sleep 3"
 
 """
-# stdlib
-from __future__ import print_function
 
 import os
 from copy import copy
