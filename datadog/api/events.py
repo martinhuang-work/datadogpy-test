@@ -12,7 +12,7 @@ class Event(GetableAPIResource, CreateableAPIResource, SearchableAPIResource):
     """
 
     _resource_name = "events"
-    _timestamp_keys = set(["start", "end"])
+    _timestamp_keys = {"start", "end"}
 
     @classmethod
     def create(cls, attach_host_name=True, **params):
