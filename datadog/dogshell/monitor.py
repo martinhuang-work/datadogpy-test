@@ -200,11 +200,9 @@ class MonitorClient(object):
             "message": monitor["message"],
             "options": monitor["options"]
         }
-        tags = monitor.get("tags", None)
-        if tags:
+        if tags := monitor.get("tags", None):
             body["tags"] = tags
-        priority = monitor.get("priority", None)
-        if priority:
+        if priority := monitor.get("priority", None):
             body["priority"] = priority
 
         res = api.Monitor.create(**body)
@@ -274,11 +272,9 @@ class MonitorClient(object):
             "message": monitor["message"],
             "options": monitor["options"]
         }
-        tags = monitor.get("tags", None)
-        if tags:
+        if tags := monitor.get("tags", None):
             body["tags"] = tags
-        priority = monitor.get("priority", None)
-        if priority:
+        if priority := monitor.get("priority", None):
             body["priority"] = priority
 
         res = api.Monitor.update(monitor["id"], **body)
@@ -345,8 +341,7 @@ class MonitorClient(object):
     def _delete(cls, args):
         api._timeout = args.timeout
         # TODO CHECK
-        res = api.Monitor.delete(args.monitor_id)
-        if res is not None:
+        if (res := api.Monitor.delete(args.monitor_id)) is not None:
             report_warnings(res)
             report_errors(res)
 
@@ -369,8 +364,7 @@ class MonitorClient(object):
     @classmethod
     def _unmute_all(cls, args):
         api._timeout = args.timeout
-        res = api.Monitor.unmute_all()
-        if res is not None:
+        if (res := api.Monitor.unmute_all()) is not None:
             report_warnings(res)
             report_errors(res)
 

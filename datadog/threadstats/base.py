@@ -71,8 +71,7 @@ class ThreadStats(object):
         self.namespace = namespace
         env_tags = [tag for tag in os.environ.get("DATADOG_TAGS", "").split(",") if tag]
         for var, tag_name in DD_ENV_TAGS_MAPPING.items():
-            value = os.environ.get(var, "")
-            if value:
+            if value := os.environ.get(var, ""):
                 env_tags.append("{name}:{value}".format(name=tag_name, value=value))
         if constant_tags is None:
             constant_tags = []
@@ -382,16 +381,14 @@ class ThreadStats(object):
 
             # Process metrics
             metrics, dists = self._get_aggregate_metrics_and_dists(timestamp or time())
-            count_metrics = len(metrics)
-            if count_metrics:
+            if count_metrics := len(metrics):
                 self.flush_count += 1
                 log.debug("Flush #%s sending %s metrics" % (self.flush_count, count_metrics))
                 self.reporter.flush_metrics(metrics)
             else:
                 log.debug("No metrics to flush. Continuing.")
 
-            count_dists = len(dists)
-            if count_dists:
+            if count_dists := len(dists):
                 self.flush_count += 1
                 log.debug("Flush #%s sending %s distributions" % (self.flush_count, count_dists))
                 self.reporter.flush_distributions(dists)
@@ -400,8 +397,7 @@ class ThreadStats(object):
 
             # Process events
             events = self._get_aggregate_events()
-            count_events = len(events)
-            if count_events:
+            if count_events := len(events):
                 self.flush_count += 1
                 log.debug("Flush #%s sending %s events" % (self.flush_count, count_events))
                 self.reporter.flush_events(events)

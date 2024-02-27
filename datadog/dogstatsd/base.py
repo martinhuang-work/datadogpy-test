@@ -353,8 +353,7 @@ class DogStatsd(object):
         # Inject values of DD_* environment variables as global tags.
         has_entity_id = False
         for var, tag_name in DD_ENV_TAGS_MAPPING.items():
-            value = os.environ.get(var, "")
-            if value:
+            if value := os.environ.get(var, ""):
                 env_tags.append("{name}:{value}".format(name=tag_name, value=value))
                 if var == ENTITY_ID_ENV_VAR:
                     has_entity_id = True
