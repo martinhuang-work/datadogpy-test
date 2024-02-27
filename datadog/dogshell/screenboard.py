@@ -249,8 +249,7 @@ class ScreenboardClient(object):
     def _delete(cls, args):
         api._timeout = args.timeout
         # TODO CHECK
-        res = api.Screenboard.delete(args.screenboard_id)
-        if res is not None:
+        if (res := api.Screenboard.delete(args.screenboard_id)) is not None:
             report_warnings(res)
             report_errors(res)
 

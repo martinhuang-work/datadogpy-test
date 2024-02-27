@@ -120,8 +120,7 @@ class EventClient(object):
         """
         api._timeout = args.timeout
         format = args.format
-        message = args.message
-        if message is None:
+        if (message := args.message) is None:
             message = sys.stdin.read()
         if args.tags is not None:
             tags = [t.strip() for t in args.tags.split(",")]

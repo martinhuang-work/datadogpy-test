@@ -114,7 +114,6 @@ class TagClient(object):
     @classmethod
     def _detach(cls, args):
         api._timeout = args.timeout
-        res = api.Tag.delete(args.host)
-        if res is not None:
+        if (res := api.Tag.delete(args.host)) is not None:
             report_warnings(res)
             report_errors(res)

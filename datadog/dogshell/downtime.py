@@ -92,8 +92,7 @@ class DowntimeClient(object):
     @classmethod
     def _cancel_downtime(cls, args):
         api._timeout = args.timeout
-        res = api.Downtime.delete(args.downtime_id)
-        if res is not None:
+        if (res := api.Downtime.delete(args.downtime_id)) is not None:
             report_warnings(res)
             report_errors(res)
 

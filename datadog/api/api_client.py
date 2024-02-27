@@ -181,9 +181,8 @@ class APIClient(object):
             cls._timeout_counter = 0
 
             # Format response content
-            content = result.content
 
-            if content:
+            if content := result.content:
                 try:
                     if is_p3k():
                         response_obj = json.loads(content.decode("utf-8"))

@@ -332,8 +332,7 @@ class TimeboardClient(object):
     @classmethod
     def _delete(cls, args):
         api._timeout = args.timeout
-        res = api.Timeboard.delete(args.timeboard_id)
-        if res is not None:
+        if (res := api.Timeboard.delete(args.timeboard_id)) is not None:
             report_warnings(res)
             report_errors(res)
 

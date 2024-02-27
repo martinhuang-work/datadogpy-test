@@ -161,8 +161,7 @@ class DashboardClient(object):
     @classmethod
     def _delete(cls, args):
         api._timeout = args.timeout
-        res = api.Dashboard.delete(args.dashboard_id)
-        if res is not None:
+        if (res := api.Dashboard.delete(args.dashboard_id)) is not None:
             report_warnings(res)
             report_errors(res)
 

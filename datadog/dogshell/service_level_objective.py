@@ -354,8 +354,7 @@ class ServiceLevelObjectiveClient(object):
     @classmethod
     def _delete(cls, args):
         api._timeout = args.timeout
-        res = api.ServiceLevelObjective.delete(args.slo_id, return_raw=True)
-        if res is not None:
+        if (res := api.ServiceLevelObjective.delete(args.slo_id, return_raw=True)) is not None:
             report_warnings(res)
             report_errors(res)
 
@@ -367,8 +366,7 @@ class ServiceLevelObjectiveClient(object):
     @classmethod
     def _delete_many(cls, args):
         api._timeout = args.timeout
-        res = api.ServiceLevelObjective.delete_many(args.slo_ids)
-        if res is not None:
+        if (res := api.ServiceLevelObjective.delete_many(args.slo_ids)) is not None:
             report_warnings(res)
             report_errors(res)
 
@@ -383,8 +381,7 @@ class ServiceLevelObjectiveClient(object):
 
         ops = {args.slo_id: args.timeframes}
 
-        res = api.ServiceLevelObjective.bulk_delete(ops)
-        if res is not None:
+        if (res := api.ServiceLevelObjective.bulk_delete(ops)) is not None:
             report_warnings(res)
             report_errors(res)
 
@@ -397,8 +394,7 @@ class ServiceLevelObjectiveClient(object):
     def _can_delete(cls, args):
         api._timeout = args.timeout
 
-        res = api.ServiceLevelObjective.can_delete(args.slo_ids)
-        if res is not None:
+        if (res := api.ServiceLevelObjective.can_delete(args.slo_ids)) is not None:
             report_warnings(res)
             report_errors(res)
 
@@ -411,8 +407,7 @@ class ServiceLevelObjectiveClient(object):
     def _history(cls, args):
         api._timeout = args.timeout
 
-        res = api.ServiceLevelObjective.history(args.slo_id)
-        if res is not None:
+        if (res := api.ServiceLevelObjective.history(args.slo_id)) is not None:
             report_warnings(res)
             report_errors(res)
 
